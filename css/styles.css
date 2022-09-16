@@ -18,6 +18,7 @@ h2 {
 	border-bottom: 1px solid gray;
 }
 
+/* Board */
 .game-board {
 	display: grid;
 	justify-content: center;
@@ -25,41 +26,47 @@ h2 {
 	margin: 30px;
 }
 
+/* Board cells */
 .board-cell {
 	display: flex;
 	width: 130px;
 	height: 130px;
-	transition: transform 400ms;
 	border: 1px solid black;
 }
 
-.board-cells:active {
-	transform: scale(0.95);
-	transition: transform 200ms;
+.buttons {
+	display: flex;
+	justify-content: center;
+	gap: 20px;
 }
 
-#playAgain {
+/* Play again button */
+#playAgain,
+#reset {
 	display: block;
 	border-radius: 10px;
 	background-color: black;
-	margin: 20px auto;
+	margin: 20px 0;
 	width: 100px;
 	height: 45px;
 	font-size: 15px;
 	color: white;
 	transition: transform 400ms;
 }
-/* Reset button on click */
-#playAgain:active {
+/* Play again button on click */
+#playAgain,
+#reset:active {
 	transform: scale(0.95);
 	transition: transform 200ms;
 }
 
+/* Red badge */
 .red {
 	background: url(./images/red.png);
 	background-size: cover;
 }
 
+/* Yellow badge */
 .yellow {
 	background-image: url(./images/yellow.png);
 	background-size: cover;
