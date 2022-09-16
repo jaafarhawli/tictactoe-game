@@ -38,7 +38,7 @@ h2 {
 	transition: transform 200ms;
 }
 
-#replay {
+#playAgain {
 	display: block;
 	border-radius: 10px;
 	background-color: black;
@@ -50,7 +50,7 @@ h2 {
 	transition: transform 400ms;
 }
 /* Reset button on click */
-#replay:active {
+#playAgain:active {
 	transform: scale(0.95);
 	transition: transform 200ms;
 }

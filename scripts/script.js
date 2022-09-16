@@ -1,19 +1,24 @@
 const cells = document.querySelectorAll('.board-cell');
 const statusText = document.querySelector('.status');
+const playAgain = document.getElementById('playAgain');
 
-let counter = 0;
-let turn = 'red';
+let i;
+let startTurn = 'red';
+let turn = startTurn;
 let selectedCell;
 let column;
 let row;
 let diagonal;
+let counter = 0;
+let redScore = 0;
+let yellowScore = 0;
 
 cells.forEach((cell) => {
-	cell.style.order = counter;
-	counter += 1;
+	cell.style.order = i;
+	i += 1;
 });
 
-for (let i = 0; i < 3; i++) {
+for (i = 0; i < 3; i++) {
 	cells[i].gridRow = 1;
 }
 for (i = 3; i < 6; i++) {
@@ -46,6 +51,7 @@ function play() {
 	if (selectedCell.classList.contains('red', 'yellow')) {
 		return;
 	} else {
+		counter += 1;
 		selectedCell.classList.add(`${turn}`);
 		i = 0;
 		while (i < 9) {
@@ -68,7 +74,10 @@ function play() {
 		}
 		if (row > 2 || column > 2 || diagonal > 2) {
 			cells.forEach((cell) => cell.removeEventListener('click', play));
-			statusText.innerHTML = `${turn} won!`;
+			if (`${turn}` == 'red') redScore += 1;
+			else yellowScore += 1;
+			statusText.innerHTML = `Red: ${redScore}, Yellow: ${yellowScore}`;
+			return;
 		}
 		if (
 			cells[0].classList.contains(`${turn}`) &&
@@ -76,7 +85,10 @@ function play() {
 			cells[8].classList.contains(`${turn}`)
 		) {
 			cells.forEach((cell) => cell.removeEventListener('click', play));
-			statusText.innerHTML = `${turn} won!`;
+			if (`${turn}` == 'red') redScore += 1;
+			else yellowScore += 1;
+			statusText.innerHTML = `Red: ${redScore}, Yellow: ${yellowScore}`;
+			return;
 		} else {
 			if (turn == 'red') turn = 'yellow';
 			else turn = 'red';
@@ -84,5 +96,21 @@ function play() {
 			column = 0;
 			diagonal = 0;
 		}
+		if (counter == 9) {
+			statusText.innerHTML = 'Draw';
+		}
 	}
 }
+
+playAgain.addEventListener('click', () => {
+	cells.forEach((cell) => cell.classList.remove('red'));
+	cells.forEach((cell) => cell.classList.remove('yellow'));
+	row = 0;
+	column = 0;
+	diagonal = 0;
+	counter = 0;
+	if (startTurn == 'red') turn = 'yellow';
+	else turn = 'red';
+	cells.forEach((cell) => cell.addEventListener('click', play));
+	statusText.innerHTML = `Red: ${redScore}, Yellow: ${yellowScore}`;
+});
