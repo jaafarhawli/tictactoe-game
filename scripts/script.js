@@ -69,6 +69,14 @@ function play() {
 		if (row > 2 || column > 2 || diagonal > 2) {
 			cells.forEach((cell) => cell.removeEventListener('click', play));
 			statusText.innerHTML = `${turn} won!`;
+		}
+		if (
+			cells[0].classList.contains(`${turn}`) &&
+			cells[4].classList.contains(`${turn}`) &&
+			cells[8].classList.contains(`${turn}`)
+		) {
+			cells.forEach((cell) => cell.removeEventListener('click', play));
+			statusText.innerHTML = `${turn} won!`;
 		} else {
 			if (turn == 'red') turn = 'yellow';
 			else turn = 'red';
